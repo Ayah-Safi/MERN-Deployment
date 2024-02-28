@@ -35,20 +35,8 @@ module.exports.updatePatient = (request, response) => {
         .catch(err => response.status(400).json(err));
 };
 
-module.exports.getPatientCount = async (req, res) => {
-    try {
-        const count = await Patient.countDocuments();
-        res.json({ count });
-    } catch (error) {
-        res.status(500).json({ message: "An error occurred while fetching patient count", error: error });
-    }
-};
-
-module.exports.getPatientCount = async (req, res) => {
-    try {
-        const patientCount = await Patient.countDocuments();
-        res.json({ count: patientCount });
-    } catch (error) {
-        res.status(500).send(error.message);
-    }
+module.exports.getPatientCount = (req, res) => {
+    Patient.countDocuments()
+        .then(count => res.json({ count }))
+        .catch(error => res.status(500).json({ message: "An error occurred while fetching patient count", error: error }));
 };

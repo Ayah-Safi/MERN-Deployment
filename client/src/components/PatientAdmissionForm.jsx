@@ -6,8 +6,8 @@ import {
   Link 
 } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import PatientCountContext from '../PatientCountContext';
 import  { useContext } from 'react';
+import {PatientCountContext} from '../PatientCountProvider';
 
   
 
@@ -17,8 +17,7 @@ const PatientAdmissionForm = () => {
     const [symptoms, setSymptoms] = useState('');
     const [errors, setErrors] = useState([]); 
     const navigate = useNavigate();
-    const { patientCount, fetchPatientCount } = useContext(PatientCountContext);
-    
+    const { patientCount } = useContext(PatientCountContext);  
     const onSubmitHandler = e => {
         e.preventDefault();
         axios.post('http://localhost:8000/patient/add', {

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import PatientCountContext from '../PatientCountContext';
 import  { useContext } from 'react';
+import {PatientCountContext} from '../PatientCountProvider';
 
 
 const UpdatePatient = () => {
@@ -11,7 +11,7 @@ const UpdatePatient = () => {
     const [symptoms, setSymptoms] = useState('');
     const { id } = useParams();
     const navigate = useNavigate();
-    const { patientCount, fetchPatientCount } = useContext(PatientCountContext);
+    const { patientCount } = useContext(PatientCountContext);  
     useEffect(() => {
         axios.get(`http://localhost:8000/patients/${id}`)
             .then(response => {
